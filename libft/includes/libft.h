@@ -16,6 +16,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdint.h>
 
 typedef struct		s_list
 {
@@ -68,7 +69,7 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
-char				*ft_itoa(int n);
+char				*ft_itoa(intmax_t n, int precision, int param, int rev);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);
@@ -86,7 +87,7 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_count_wds(char const *s, char c);
 int					ft_wd_len(char const *s, char c, int j);
-int					ft_int_length(int n);
+int					ft_int_length(intmax_t n);
 char				*ft_strn_append(char *s1, char *s2, int n);
 char				*ft_copystr(char *str);
 char                *ft_realloc(char *str, int n);

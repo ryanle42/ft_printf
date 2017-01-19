@@ -12,41 +12,52 @@
 
 #include "libft.h"
 
-static char		*itoa_two(long m, char *str, int flag, int i)
+static char		*itoa_two(intmax_t n, int i, int rev)
 {
-	if (m == 0)
+	char *str;
+
+	if (!(str = (char *)malloc(sizeof(char) * ft_int_length(n) + 1)))
+		return (NULL);
+	if (n == 0)
 	{
 		str[i++] = '0';
 		str[i] = '\0';
 		return (str);
 	}
-	while (m != 0)
+	while (n != 0)
 	{
-		str[i++] = (m % 10) + '0';
-		m /= 10;
+		str[i++] = (n % 10) + '0';
+		n /= 10;
 	}
-	if (flag)
-		str[i++] = '-';
 	str[i] = '\0';
-	return (ft_strrev(str, i));
+	return rev ? (ft_strrev(str, i)) : str;
 }
 
-char			*ft_itoa(int n)
+char			*ft_itoa(intmax_t n, int precision, int param, int rev)
 {
-	char	*str;
-	int		flag;
-	int		i;
-	long	m;
+	char		*str;
+	int 		i;
+	int 		flag;
+	int  		zeros;
 
-	i = 0;
 	flag = 0;
-	m = n;
-	if (m < 0)
+	if (n < 0)
 	{
-		flag = 1;
-		m *= -1;
+		flag++;
+		n = -n;
 	}
-	if (!(str = (char *)malloc(sizeof(char) * ft_int_length(m) + 1)))
+	zeros = precision - ft_int_length(n);
+	if (param)
+		zeros -= flag;
+	if (zeros < 0)
+		zeros = 0;
+	if (!(str = (char *)malloc(sizeof(char) * zeros + flag + 1)))
 		return (NULL);
-	return (itoa_two(m, str, flag, i));
+	i = 0;
+	if (flag)
+		str[i++] = '-';
+	while (i < zeros + flag)
+		str[i++] = '0';
+	str[i] = '\0';
+	return (ft_strjoin(str, itoa_two(n, 0, rev)));
 }

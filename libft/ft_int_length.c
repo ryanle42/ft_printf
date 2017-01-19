@@ -12,11 +12,11 @@
 
 #include "libft.h"
 
-int	ft_int_length(int n)
+int	ft_int_length(intmax_t n)
 {
 	int i;
 
-	i = 1;
+	i = 0;
 	while (n > 0)
 	{
 		n /= 10;
