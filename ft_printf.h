@@ -32,7 +32,9 @@ intmax_t convert_unsigned(param *params, intmax_t n);
 int 	get_size(const char *fmt);
 void 	write_int(param *params, va_list args);
 void 	write_unsigned_int(param *params, va_list args);
+void	write_char(param *params, va_list args);
 void	write_octal(param *params, va_list args);
 void 	write_hex(param *params, va_list args, int letters);
+void    write_spaces(param *params, int n, int j);
 
 #endif

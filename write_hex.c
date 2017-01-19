@@ -54,6 +54,28 @@ char *add_zeros(char *str, int precision)
     return (ft_strjoin(tmp, str));
 }
 
+void    write_str(param *params, char *str, intmax_t n, int letters)
+{
+    if (params->flags->hash && n != 0)
+    {
+        if (letters)
+            write(1, "0X", 2);
+        else
+            write(1, "0x", 2);
+    }
+    ft_putstr(str);
+}
+
+int     hex_str_length(param *params, char *str, intmax_t n)
+{
+    int length;
+
+    length = ft_strlen(str);
+    if (params->flags->hash && n != 0)
+        length += 2;
+    return (length);
+}
+
 void write_hex(param *params, va_list args, int letters)
 {	
     char *tmp;
@@ -67,11 +89,11 @@ void write_hex(param *params, va_list args, int letters)
     if (params->flags->zero)
         params->precision = params->width;
     tmp = add_zeros(tmp, params->precision);
-    length = ft_strlen(tmp);
+    length = hex_str_length(params, tmp, n);
     if (!params->flags->minus && !params->flags->zero)
         write_spaces(params, params->width - length, params->precision - length);
     if (!(n == 0 && params->precision == 0))
-        ft_putstr(tmp);
+        write_str(params, tmp, n, letters);
     if (params->flags->minus && !params->flags->zero)
         write_spaces(params, params->width - length, params->precision - length);
 }

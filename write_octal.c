@@ -15,6 +15,22 @@ intmax_t convert_octal(intmax_t n)
 	}
 	return (i);
 }
+void    put_octal_str(param *params, char *str)
+{
+    if (params->flags->hash)
+        write(1, "0", 1);
+    ft_putstr(str);
+}
+
+int     get_octal_length(param *params, char *str)
+{
+    int length;
+
+    length = ft_strlen(str);
+    if (params->flags->hash)
+        length++;
+    return (length);
+}
 void	write_octal(param *params, va_list args)
 {
 	char *tmp;
@@ -28,11 +44,11 @@ void	write_octal(param *params, va_list args)
     if (params->flags->zero)
         params->precision = params->width;
     tmp = ft_itoa(n, params->precision, params->flags->zero, 0);
-    length = ft_strlen(tmp);
+    length = get_octal_length(params, tmp);
     if (!params->flags->minus && !params->flags->zero)
     	write_spaces(params, params->width - length, params->precision - length);
     if (!(n == 0 && params->precision == 0))
-    	ft_putstr(tmp);
+    	put_octal_str(params, tmp);
     if (params->flags->minus && !params->flags->zero)
         write_spaces(params, params->width - length, params->precision - length);
 }
