@@ -1,6 +1,6 @@
 NAME = printf
 
-SRCS = ft_printf.c get_flags.c write_int.c write_unsigned_int.c write_char.c write_spaces.c write_octal.c size_converters.c write_hex.c
+SRCS = ft_printf.c get_flags.c write_int.c write_unsigned_int.c write_char.c write_string.c write_spaces.c write_octal.c size_converters.c write_hex.c write_ptr.c
 
 HEADERS = . libft/includes
 

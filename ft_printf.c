@@ -15,6 +15,7 @@ void    get_wid_prec(const char **fmt, param *params)
     if (**fmt == '.')
     {
         (*fmt)++;
+        params->is_precision = 1;
         params->precision = 0;
         while (ft_isdigit(**fmt))
         {
@@ -34,7 +35,6 @@ int ft_printf(const char *fmt, ...)
     param *params;
     va_list args;
     char *tmp;
-
     va_start(args, fmt);
     while (*fmt)
     {
@@ -49,17 +49,16 @@ int ft_printf(const char *fmt, ...)
                 write_unsigned_int(params, args);
             else if (*fmt == 'o')
                 write_octal(params, args);
-            else if (*fmt == 's')
-            {
-                tmp = va_arg(args, char *);
-                ft_putstr(tmp);
-            }
             else if (*fmt == 'c')
                 write_char(params, args);
             else if (*fmt == 'x')
                 write_hex(params, args, 0);
             else if (*fmt == 'X')
                 write_hex(params, args, 1);
+            else if (*fmt == 'p')
+                write_ptr(params, args);
+            else if (*fmt == 's')
+                write_string(params, args);
             else if (*fmt == '%')
                 ft_putchar('%');
         }
@@ -73,6 +72,6 @@ int ft_printf(const char *fmt, ...)
 int main(void) 
 {
     char *a = "higfhgh";
-    ft_printf("hell%-.0d man%10i%s%10c%%%%\nx:%#10o\nX:%#X\n\n", -12, -18433, a, 'd', 1234455, 0);
-    printf("hell%-.0d man%10i%s%10c%%%%\nx:%#10o\nX:%#X\n\n", -12, -18433, a, 'd', 1234455, 0);
+    ft_printf("hell%-.0d man%.10i%.10s%10c%%%%\nx:%-20p\nX:%#X\n\n", -12, -18433, a, 'd', &a, 0);
+    printf("hell%-.0d man%.10i%.10s%10c%%%%\nx:%-20p\nX:%#X\n\n", -12, -18433, a, 'd', &a, 0);
 }

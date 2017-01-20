@@ -22,18 +22,18 @@ intmax_t convert_signed(param *params, intmax_t n)
 intmax_t convert_unsigned(param *params, intmax_t n)
 {
     if (params->size == 1)
-        n = (unsigned)(short)n;
+        n = (unsigned short)n;
     else if (params->size == 2)
-        n = (unsigned)(intmax_t)n;
+        n = (uintmax_t)n;
     else if (params->size == 3)
-        n = (unsigned)(long)n;
+        n = (unsigned long)n;
     else if (params->size == 4)
-        n = (unsigned)(size_t)n;
+        n = (size_t)n;
     else if (params->size == 5)
-        n = (unsigned)(char)n;
+        n = (unsigned char)n;
     else if (params->size == 6)
-        n = (unsigned)(long long)n;
+        n = (unsigned long long)n;
     else
-        n = (unsigned)(int)n;
+        n = (unsigned int)n;
     return (n);
 }

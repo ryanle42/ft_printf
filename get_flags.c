@@ -29,6 +29,7 @@ param *reset_params()
     params->flags->space = 0;
     params->flags->zero = 0;
     params->precision = 1;
+    params->is_precision = 0;
     params->width = 0;
     return (params);
 }

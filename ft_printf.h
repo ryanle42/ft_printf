@@ -21,6 +21,7 @@ typedef struct aflag_len{
     int size;
     int width;
     int precision;
+    int is_precision;
 }param;
 
 int get_flag(int fmt, flag *flags);
@@ -35,6 +36,8 @@ void 	write_unsigned_int(param *params, va_list args);
 void	write_char(param *params, va_list args);
 void	write_octal(param *params, va_list args);
 void 	write_hex(param *params, va_list args, int letters);
+void 	write_ptr(param *params, va_list args);
 void    write_spaces(param *params, int n, int j);
+void	write_string(param *params, va_list args);
 
 #endif
