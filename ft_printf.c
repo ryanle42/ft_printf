@@ -45,9 +45,9 @@ int ft_printf(const char *fmt, ...)
             get_wid_prec(&fmt, params);
             if (*fmt == 'd' || *fmt == 'i')
                 write_int(params, args);
-            else if (*fmt == 'u')
+            else if (*fmt == 'u' || *fmt == 'D' || *fmt == 'U')
                 write_unsigned_int(params, args);
-            else if (*fmt == 'o')
+            else if (*fmt == 'o' || *fmt == 'O')
                 write_octal(params, args);
             else if (*fmt == 'c')
                 write_char(params, args);
@@ -72,6 +72,6 @@ int ft_printf(const char *fmt, ...)
 int main(void) 
 {
     char *a = "higfhgh";
-    ft_printf("hell%-.0d man%.10i%.10s%10c%%%%\nx:%-20p\nX:%#X\n\n", -12, -18433, a, 'd', &a, 0);
-    printf("hell%-.0d man%.10i%.10s%10c%%%%\nx:%-20p\nX:%#X\n\n", -12, -18433, a, 'd', &a, 0);
+    ft_printf("hell%-.0D man%.10i%.10s%10c%%%%\nx:%#o\nX:%#X\n\n", -12, -18433, a, 'd', 2312321, 0);
+    printf("hell%-.0U man%.10i%.10s%10c%%%%\nx:%#O\nX:%#X\n\n", -12, -18433, a, 'd', 2312321, 0);
 }
