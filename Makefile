@@ -1,15 +1,16 @@
 NAME = printf
 
-SRCS = ft_printf.c get_flags.c write_int.c write_unsigned_int.c write_char.c write_string.c write_spaces.c write_octal.c size_converters.c write_hex.c write_ptr.c
+SRCS = ./srcs/print_memory.c ./srcs/ft_printf.c ./srcs/get_flags.c ./srcs/write_int.c ./srcs/write_unsigned_int.c ./srcs/write_char.c \
+	./srcs/write_string.c ./srcs/write_spaces.c ./srcs/write_octal.c ./srcs/size_converters.c ./srcs/write_hex.c ./srcs/write_ptr.c main.c
 
-HEADERS = . libft/includes
+HEADERS = libft/includes
 
 CC = gcc -Wall -Werror -Wextra
 
 all: $(NAME)
 
 $(NAME):
-	gcc -o $(NAME) $(SRCS) ./libft/libft.a -I . -I ./libft/includes
+	gcc -o $(NAME) $(SRCS) ./libft/libft.a -I ./includes -I $(HEADERS)
 
 clean:
 

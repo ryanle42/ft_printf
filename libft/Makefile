@@ -77,7 +77,8 @@ OBJ = ft_memset.o \
 	  ft_int_length.o \
 	  ft_strn_append.o \
 	  ft_copystr.o \
-	  ft_realloc.o
+	  ft_realloc.o \
+	  get_next_line.o
 
 CC = gcc -Wall -Werror -Wextra -I ./includes
 

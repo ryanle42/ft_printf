@@ -40,4 +40,9 @@ void 	write_ptr(param *params, va_list args);
 void    write_spaces(param *params, int n, int j);
 void	write_string(param *params, va_list args);
 
+void print_memory(const void *addr, size_t size);
+
+//Testing
+
+int						get_next_line(const int fd, char **line);
 #endif

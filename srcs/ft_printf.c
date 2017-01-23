@@ -1,8 +1,11 @@
 #include "ft_printf.h"
+#include <stddef.h>
+#include <wchar.h>
+#include <locale.h>
 
 //%[parameter][flags][width][.precision][length]type
 
-void    get_wid_prec(const char **fmt, param *params)
+void    get_params(const char **fmt, param *params)
 {
     while (get_flag(**fmt, params->flags) != 0)
         (*fmt)++;
@@ -30,11 +33,12 @@ void    get_wid_prec(const char **fmt, param *params)
     else if (params->size > 0)
         (*fmt)++;
 }
+
 int ft_printf(const char *fmt, ...)
 {
     param *params;
     va_list args;
-    char *tmp;
+    wchar_t *tmp;
     va_start(args, fmt);
     while (*fmt)
     {
@@ -42,7 +46,7 @@ int ft_printf(const char *fmt, ...)
         {
             params = reset_params();
             fmt++;
-            get_wid_prec(&fmt, params);
+            get_params(&fmt, params);
             if (*fmt == 'd' || *fmt == 'i')
                 write_int(params, args);
             else if (*fmt == 'u' || *fmt == 'D' || *fmt == 'U')
@@ -59,6 +63,10 @@ int ft_printf(const char *fmt, ...)
                 write_ptr(params, args);
             else if (*fmt == 's')
                 write_string(params, args);
+            else if (*fmt == 'S')
+            {
+                tmp = va_arg(args, wchar_t*);
+            }
             else if (*fmt == '%')
                 ft_putchar('%');
         }
@@ -67,11 +75,4 @@ int ft_printf(const char *fmt, ...)
         fmt++;
     }
     return (1);
-}
-
-int main(void) 
-{
-    char *a = "higfhgh";
-    ft_printf("hell%-.0D man%.10i%.10s%10c%%%%\nx:%#o\nX:%#X\n\n", -12, -18433, a, 'd', 2312321, 0);
-    printf("hell%-.0U man%.10i%.10s%10c%%%%\nx:%#O\nX:%#X\n\n", -12, -18433, a, 'd', 2312321, 0);
 }

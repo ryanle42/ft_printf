@@ -40,7 +40,7 @@ void    remove_conflict_flags(param *params)
         params->flags->zero = 0;
     if (params->flags->plus && params->flags->space)
         params->flags->space = 0;
-    if (params->flags->zero && (params->precision > 0))
+    if (params->flags->zero && (params->is_precision > 0))
        params->flags->zero = 0;
 }
 int is_conversion(char fmt)
@@ -48,7 +48,7 @@ int is_conversion(char fmt)
     if (fmt == 'c' || fmt == 's' || \
         fmt == 'd' || fmt == 'i' || \
         fmt == 'x' || fmt == 'X' || \
-        fmt == '%')
+        fmt == '%' || fmt == 'u')
         return (1);
     return (0);
 }
