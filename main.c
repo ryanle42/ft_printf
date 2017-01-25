@@ -49,11 +49,11 @@ int main(void)
     printf("%-.10lx\n", 121212312312334);
     ft_printf("%-.10lx\n", 121212312312334);
     fflush(stdout);  
-    printf("%-3.2li\n", 121212312312334);
-    ft_printf("%-3.2li\n", 121212312312334);
+    printf("%- 3.2li\n", 121212312312334);
+    ft_printf("%- 3.2li\n", 121212312312334);
     fflush(stdout);  
-    printf("%-3.2li\n", 121212312312334);
-    ft_printf("%-3.2li\n", 121212312312334);
+    printf("%- 3.2li\n", 121212312312334);
+    ft_printf("%- 3.2li\n", 121212312312334);
     fflush(stdout);  
     printf("%022x\n", 12334);
     ft_printf("%022x\n", 12334);
