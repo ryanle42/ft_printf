@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_copystr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: rle <rle@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/22 16:34:40 by rle               #+#    #+#             */
-/*   Updated: 2016/12/27 15:20:05 by rle              ###   ########.fr       */
+/*   Updated: 2017/04/21 13:29:26 by rle              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ char	*ft_copystr(char *str)
 	int		len;
 
 	len = ft_strlen(str);
-	copy = ft_strnew(len);
+	copy = (char *)malloc(sizeof(char) * len + 1);
 	i = 0;
 	while (str[i])
 	{
 		copy[i] = str[i];
 		i++;
 	}
+	copy[i] = '\0';
 	return (copy);
 }

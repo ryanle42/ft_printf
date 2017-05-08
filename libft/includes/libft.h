@@ -6,16 +6,20 @@
 /*   By: rle <rle@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:54:51 by rle               #+#    #+#             */
-/*   Updated: 2017/04/05 13:56:53 by rle              ###   ########.fr       */
+/*   Updated: 2017/04/18 20:34:51 by rle              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# define BUFF_SIZE 10
+
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 typedef struct		s_list
 {
@@ -24,6 +28,15 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+typedef struct		s_file
+{
+	int				file;
+	int				ret;
+	char			*extra;
+	struct s_file	*next;
+}					t_file;
+
+int					get_next_line(const int fd, char **line);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
