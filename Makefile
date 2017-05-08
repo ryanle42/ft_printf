@@ -1,23 +1,33 @@
-NAME = printf
+NAME = libftprintf.a
 
-SRCS = ./srcs/print_memory.c ./srcs/ft_printf.c ./srcs/get_flags.c ./srcs/write_int.c ./srcs/write_unsigned_int.c ./srcs/write_char.c \
-	./srcs/write_string.c ./srcs/write_spaces.c ./srcs/write_octal.c ./srcs/size_converters.c ./srcs/write_hex.c ./srcs/write_ptr.c main.c
+OBJS = $(addsuffix .o,ft_printf flags params size_converters write_hex hex_helpers \
+		write_int int_helpers write_octal octal_helpers write_unsigned_int \
+		unsigned_helpers write_ptr write_char write_string)
 
-HEADERS = libft/includes
+CC = gcc
 
-CC = gcc -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
+
+INCLUDES = -I ./includes -I ./libft/includes
+
+LIB = libft/libft.a
 
 all: $(NAME)
 
-$(NAME):
-	gcc -o $(NAME) $(SRCS) ./libft/libft.a -I ./includes -I $(HEADERS)
+$(NAME): $(LIB) $(OBJS)
+	cp $(LIB) $(NAME)
+	ar rc $(NAME) $(OBJS) $(LIB)
+
+%.o: srcs/%.c
+	$(CC) -c $< $(CFLAGS) $(INCLUDES)
+
+$(LIB):
+	$(MAKE) -C libft
 
 clean:
+	rm -rf $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-bin: re
-	make clean

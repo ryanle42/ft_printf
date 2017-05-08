@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rle <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: rle <rle@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 16:54:51 by rle               #+#    #+#             */
-/*   Updated: 2016/12/05 19:29:08 by rle              ###   ########.fr       */
+/*   Updated: 2017/04/05 13:56:53 by rle              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdint.h>
 
 typedef struct		s_list
 {
@@ -69,7 +68,7 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
-char				*ft_itoa(intmax_t n, int precision, int param, int rev);
+char				*ft_itoa(int n);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);
@@ -90,6 +89,6 @@ int					ft_wd_len(char const *s, char c, int j);
 int					ft_int_length(intmax_t n);
 char				*ft_strn_append(char *s1, char *s2, int n);
 char				*ft_copystr(char *str);
-char                *ft_realloc(char *str, int n);
+char				*ft_realloc(char *str, int n);
 
 #endif

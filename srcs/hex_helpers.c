@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write_char.c                                       :+:      :+:    :+:   */
+/*   hex_helpers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle <rle@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/05 13:44:40 by rle               #+#    #+#             */
-/*   Updated: 2017/04/05 15:17:59 by rle              ###   ########.fr       */
+/*   Created: 2017/04/05 12:33:30 by rle               #+#    #+#             */
+/*   Updated: 2017/04/05 15:19:37 by rle              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	write_spaces(t_param *params)
+int		hex_length(uintmax_t n)
 {
-	while (params->width > 0)
+	int	i;
+
+	i = 0;
+	if (n == 0)
+		return (1);
+	while (n > 0)
 	{
-		write(1, " ", 1);
-		params->width--;
-		params->counter++;
+		n /= 16;
+		i++;
 	}
+	return (i);
 }
 
-void		write_char(t_param *params, unsigned char c)
+void	hash_except(t_param *params, int letters)
 {
-	params->width--;
-	if (!params->flags->minus)
-		write_spaces(params);
-	ft_putchar(c);
-	if (params->flags->minus)
-		write_spaces(params);
-	params->counter += 1;
+	if (letters == 0)
+		ft_putstr("0x");
+	else
+		ft_putstr("0X");
+	params->width -= 2;
+	params->counter += 2;
 }

@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   write_char.c                                       :+:      :+:    :+:   */
+/*   unsigned_helpers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rle <rle@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/05 13:44:40 by rle               #+#    #+#             */
-/*   Updated: 2017/04/05 15:17:59 by rle              ###   ########.fr       */
+/*   Created: 2017/04/05 12:53:52 by rle               #+#    #+#             */
+/*   Updated: 2017/04/05 15:17:52 by rle              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	write_spaces(t_param *params)
+int		unsigned_int_length(uintmax_t n)
 {
-	while (params->width > 0)
+	int i;
+
+	i = 1;
+	if (n == 0)
+		i++;
+	while (n > 0)
 	{
-		write(1, " ", 1);
-		params->width--;
-		params->counter++;
+		n /= 10;
+		i++;
 	}
+	return (i);
 }
 
-void		write_char(t_param *params, unsigned char c)
+void	unsigned_flags(t_param *params)
 {
-	params->width--;
-	if (!params->flags->minus)
-		write_spaces(params);
-	ft_putchar(c);
-	if (params->flags->minus)
-		write_spaces(params);
-	params->counter += 1;
+	if (params->flags->zero && params->flags->minus)
+		params->flags->zero = 0;
+	if (params->flags->zero && params->is_precision)
+		params->flags->zero = 0;
+	if (params->flags->plus && params->flags->space)
+		params->flags->space = 0;
 }

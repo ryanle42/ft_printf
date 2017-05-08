@@ -17,6 +17,10 @@ int	ft_int_length(intmax_t n)
 	int i;
 
 	i = 0;
+	if (n < 0)
+		n = -n;
+	if (n == 0)
+		i++;
 	while (n > 0)
 	{
 		n /= 10;

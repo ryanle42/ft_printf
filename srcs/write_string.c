@@ -1,25 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write_string.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rle <rle@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/01 14:48:25 by rle               #+#    #+#             */
+/*   Updated: 2017/04/05 15:19:05 by rle              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-void	write_string(param *params, va_list args)
+static void	write_spaces(t_param *params)
 {
-	char *tmp;
-	int length;
-	int i;
+	while (params->width > 0)
+	{
+		write(1, " ", 1);
+		params->width--;
+		params->counter++;
+	}
+}
 
+static void	calc_sp(t_param *params, int length)
+{
+	if (params->is_precision)
+	{
+		if (params->precision > length)
+			params->width -= length;
+		else
+			params->width -= params->precision;
+	}
+	else
+		params->width -= length;
+}
+
+void		write_string(t_param *params, char *str)
+{
+	int i;
+	int length;
+
+	if (!str)
+		str = "(null)";
+	length = ft_strlen(str);
 	i = 0;
-	tmp = va_arg(args, char *);
-	length = ft_strlen(tmp);
+	calc_sp(params, length);
 	if (!params->flags->minus)
-        write_spaces(params, params->width - length, 0);
-    if (params->is_precision)
-    	while (params->precision > 0)
-    	{
-    		if (tmp[i])
-        		write(1, &tmp[i++], 1);
-    		params->precision--;
-    	}
-    else
-    	ft_putstr(tmp);
-    if (params->flags->minus)
-        write_spaces(params, params->width - length, params->precision - length);
+		write_spaces(params);
+	if (params->is_precision)
+		while (str[i] && i < params->precision)
+		{
+			write(1, &str[i], 1);
+			params->counter++;
+			i++;
+		}
+	else
+	{
+		ft_putstr(str);
+		params->counter += ft_strlen(str);
+	}
+	if (params->flags->minus)
+		write_spaces(params);
 }
